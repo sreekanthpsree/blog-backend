@@ -69,7 +69,7 @@ module.exports = (app) => {
     try {
       event = req.body;
        event = stripe.webhooks.constructEvent(
-      req.rawBody,
+      req.body,
       req.headers['stripe-signature'],
       process.env.STRIPE_WEBHOOK_SECRET
  );
