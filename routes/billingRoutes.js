@@ -79,7 +79,7 @@ module.exports = (app) => {
       );
     } catch (err) {
       console.log(`⚠️  Webhook signature verification failed.`, err.message);
-      return response.sendStatus(400);
+      return res.sendStatus(400);
     }
   }
        
