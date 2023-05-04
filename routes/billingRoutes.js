@@ -63,12 +63,25 @@ module.exports = (app) => {
       res.status(500).send("Internal Server Error");
     }
   });
-  app.post("/webhook", async (req, res) => {
+  app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) => {
     let event;
 
     try {
       event = req.body;
-   
+   if (process.env.STRIPE_WEBHOOK_SECRET) {
+    // Get the signature sent by Stripe
+    const signature = request.headers['stripe-signature'];
+    try {
+      event = stripe.webhooks.constructEvent(
+        request.body,
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.log(`⚠️  Webhook signature verification failed.`, err.message);
+      return response.sendStatus(400);
+    }
+  }
        
       if (event.type === "checkout.session.completed") {
         const session = event.data.object;
