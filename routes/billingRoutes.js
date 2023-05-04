@@ -1,6 +1,7 @@
 require("dotenv").config();
 const User = require("../models/Users");
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY,{
+   timeout: 30000,);
 
 module.exports = (app) => {
   const plans = new Map([
