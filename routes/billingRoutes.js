@@ -1,16 +1,9 @@
 require("dotenv").config();
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser');
-// ...
-
-
-
 const User = require("../models/Users");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY,{
    timeout: 300000});
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 module.exports = (app) => {
   const plans = new Map([
     [1, { price: 40, name: "4 Featured psot", credit: 4 }],
@@ -67,22 +60,11 @@ module.exports = (app) => {
     let event;
 
     try {
-      event = req.body;
-   if (process.env.STRIPE_WEBHOOK_SECRET) {
-    // Get the signature sent by Stripe
-      console.log(req.headers['stripe-signature'])
-    const signature = req.headers['stripe-signature'];
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body,
-        signature,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } catch (err) {
-      console.log(`⚠️  Webhook signature verification failed.`, err.message);
-      return res.sendStatus(400);
-    }
-  }
+       event = stripe.webhooks.constructEvent(
+          req.body,
+          sig,
+          process.env.STRIPE_WEBHOOK_SECRET
+        );
        
       if (event.type === "checkout.session.completed") {
         const session = event.data.object;
