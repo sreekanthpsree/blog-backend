@@ -10,7 +10,6 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("./models/Users");
-const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const biilingRoutes = require("./routes/billingRoutes");
