@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 const User = require("../models/Users");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY,{
-   timeout: 30000});
+   timeout: 300000});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 module.exports = (app) => {
