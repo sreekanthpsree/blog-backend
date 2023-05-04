@@ -9,6 +9,18 @@ module.exports = (app) => {
     [3, { price: 120, name: "15 Featured post", credit: 15 }],
     [4, { price: 200, name: "30 Featured post", credit: 30 }],
   ]);
+  app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+  
+  
   app.post("/buyplan", async (req, res) => {
     const userID = req.body.id;
     const selectedPlan = req.body.items;
