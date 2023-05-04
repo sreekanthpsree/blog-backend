@@ -60,6 +60,12 @@ module.exports = (app) => {
 
     try {
       event = req.body;
+       event = stripe.webhooks.constructEvent(
+      request.rawBody,
+      request.headers['stripe-signature'],
+      whsec_DyGs0cEgmBIYH3Nxj8a5wDPupA4CEj0Y
+ );
+       
       if (event.type === "checkout.session.completed") {
         const session = event.data.object;
         const paymentIntent = await stripe.paymentIntents.retrieve(
