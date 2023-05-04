@@ -13,7 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const biilingRoutes = require("./routes/billingRoutes");
 
-app.use(cors());
+//app.use(cors());
 app.use(cookieParser());
 app.use((req, res, next) => {
   if (req.originalUrl === "/webhook") {
