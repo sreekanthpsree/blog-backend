@@ -7,6 +7,7 @@ const blogSchema = new Schema({
   blogAuthor: String,
   createdDate: Date,
   userID: String,
+  isFeatured: Boolean,
 });
 
 const Blog = mongoose.model("blog", blogSchema);
