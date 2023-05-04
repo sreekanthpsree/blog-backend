@@ -70,6 +70,7 @@ module.exports = (app) => {
       event = req.body;
    if (process.env.STRIPE_WEBHOOK_SECRET) {
     // Get the signature sent by Stripe
+      console.log(req.headers)
     const signature = req.headers['stripe-signature'];
     try {
       event = stripe.webhooks.constructEvent(
