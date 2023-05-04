@@ -4,6 +4,7 @@ const app = express()
 const User = require("../models/Users");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY,{
    timeout: 300000});
+stripe.setTimeout(60000)
 module.exports = (app) => {
   const plans = new Map([
     [1, { price: 40, name: "4 Featured psot", credit: 4 }],
