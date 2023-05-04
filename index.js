@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
@@ -21,14 +22,14 @@ app.use(cookieParser());
 app.use(
   cookieSession({
     name: "session",
-    keys: [keys.cookieKey],
+    keys: [process.env.cookieKey],
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(process.env.mongoURI);
 
 app.get("/", (req, res) => {
   res.send("Hellooo");
