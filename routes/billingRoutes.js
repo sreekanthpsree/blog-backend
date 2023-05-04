@@ -50,7 +50,7 @@ module.exports = (app) => {
         success_url: `${process.env.SERVER_URL}/`,
         cancel_url: `${process.env.SERVER_URL}/`,
       });
-      res.json({ url: session.url });
+      res.status(200).json({ url: session.url });
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");
