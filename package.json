@@ -8,7 +8,7 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "yarn --ignore-engines"
+    "build": "npm run build"
   },
   "keywords": [],
   "author": "",
