@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -17,7 +16,13 @@ const biilingRoutes = require("./routes/billingRoutes");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.use((req, res, next) => {
+  if (req.originalUrl === "/webhook") {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
 app.use(
   cookieSession({
     name: "session",
