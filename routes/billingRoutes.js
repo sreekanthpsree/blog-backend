@@ -68,11 +68,7 @@ module.exports = (app) => {
 
     try {
       event = req.body;
-       event = stripe.webhooks.constructEvent(
-      req.body,
-      req.headers['stripe-signature'],
-      process.env.STRIPE_WEBHOOK_SECRET
- );
+   
        
       if (event.type === "checkout.session.completed") {
         const session = event.data.object;
