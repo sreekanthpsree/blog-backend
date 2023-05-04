@@ -1,8 +1,15 @@
 require("dotenv").config();
+
+const bodyParser = require('body-parser');
+// ...
+
+
+
 const User = require("../models/Users");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY,{
    timeout: 30000});
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 module.exports = (app) => {
   const plans = new Map([
     [1, { price: 40, name: "4 Featured psot", credit: 4 }],
