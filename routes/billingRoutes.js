@@ -58,7 +58,7 @@ module.exports = (app) => {
   });
   app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) => {
     let event;
-
+const sig = req.headers["stripe-signature"];
     try {
        event = stripe.webhooks.constructEvent(
           req.body,
