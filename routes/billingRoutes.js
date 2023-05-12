@@ -81,7 +81,7 @@ const sig = req.headers["stripe-signature"];
         );
         
       }
-       res.status(200).json({message:'Payment success'});
+       res.status(200).json({ user: user });
     } catch (err) {
       console.error(err);
       return res.status(400).send(`Webhook Error: ${err.message}`);
