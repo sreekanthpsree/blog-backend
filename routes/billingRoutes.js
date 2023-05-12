@@ -78,8 +78,9 @@ const sig = req.headers["stripe-signature"];
           { $inc: { credit: plan.credit } },
           { new: true }
         );
-        res.status(200).json(user);
+        
       }
+       res.status(200).json(user);
     } catch (err) {
       console.error(err);
       return res.status(400).send(`Webhook Error: ${err.message}`);
