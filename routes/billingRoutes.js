@@ -74,7 +74,7 @@ const sig = req.headers["stripe-signature"];
           session.payment_intent
         );
         const plan = plans.get(+session.metadata.planId);
-        const user = await User.findByIdAndUpdate(
+         user = await User.findByIdAndUpdate(
           session.metadata.userId,
           { $inc: { credit: plan.credit } },
           { new: true }
