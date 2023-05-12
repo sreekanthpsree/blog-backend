@@ -60,7 +60,7 @@ module.exports = (app) => {
     let event;
      console.log(req)
 const sig = req.headers["stripe-signature"];
-   const user;
+   const user={};
     try {
        event = stripe.webhooks.constructEvent(
           req.body,
